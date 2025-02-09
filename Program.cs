@@ -21,18 +21,7 @@ builder.Services.AddScoped<IRepository<Testimonial>, TestimonialService>();
 builder.Services.AddScoped<IRepository<WhyChoosingUs>, WhyChoosingUsService>();
 #endregion
 
-string ApiCorsPolicy = "_apiCorsPolicy";
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(ApiCorsPolicy, builder =>
-    {
-        builder.WithOrigins("http://localhost", "https://localhost", "http://167.172.111.225", "https://167.172.111.225")
-               .AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-
-    });
-});
+ 
 
 var app = builder.Build();
 
@@ -44,7 +33,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseCors(ApiCorsPolicy);
+ 
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

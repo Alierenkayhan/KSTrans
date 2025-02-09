@@ -17,6 +17,10 @@ public class About
     [BsonElement("Features")]
     public string Features { get; set; }
 
+
+    [BsonElement("Address")]
+    public string Address { get; set; }
+
     [BsonElement("Email")]
     public string Email { get; set; }
 

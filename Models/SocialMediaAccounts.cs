@@ -11,6 +11,6 @@ public class SocialMediaAccounts
     [BsonElement("Link")]
     public string Link { get; set; }
 
-    [BsonElement("Url")]
-    public string Url { get; set; }
+    [BsonElement("IconClass")]
+    public string IconClass { get; set; }
 }

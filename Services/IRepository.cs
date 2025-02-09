@@ -2,6 +2,6 @@
 
 public interface IRepository<T>
 {
-    Task<List<T>> GetAsync();
+    Task<List<T>> GetListAsync();
     Task<T> GetAsync(Guid id);
 }
