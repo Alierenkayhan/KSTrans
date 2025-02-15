@@ -1,5 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Home";
+    Layout = "../Shared/_Layout";
+     ViewData["Title"] = "Home";
 }
 
-<div>Hello</div>
+
+@await Html.PartialAsync("../ViewsParts/_Carousel")
+
+@await Html.PartialAsync("../ViewsParts/_AboutPart")
+
+@await Html.PartialAsync("../ViewsParts/_Facts")
+
+@await Html.PartialAsync("../ViewsParts/_Features")
+
+@await Html.PartialAsync("../ViewsParts/_ServicePart")
+
+@await Html.PartialAsync("../ViewsParts/_Project")
+
+@await Html.PartialAsync("../ViewsParts/_TeamPart")
+
+@await Html.PartialAsync("../ViewsParts/_TestimonialPart")
+
+@await Html.PartialAsync("../ViewsParts/_VideoModal")
