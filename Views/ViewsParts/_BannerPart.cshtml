@@ -1,0 +1,26 @@
+﻿<!-- Page Header Start -->
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <h1 class="display-3 text-white animated slideInRight">@ViewData["PageTitle"]</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb animated slideInRight mb-0">
+                @if (ViewData["Breadcrumbs"] != null)
+                {
+                    var breadcrumbs = (List<(string Text, string? Url)>)ViewData["Breadcrumbs"];
+                    foreach (var breadcrumb in breadcrumbs)
+                    {
+                        if (!string.IsNullOrEmpty(breadcrumb.Url))
+                        {
+                            <li class="breadcrumb-item"><a href="@breadcrumb.Url">@breadcrumb.Text</a></li>
+                        }
+                        else
+                        {
+                            <li class="breadcrumb-item active" aria-current="page">@breadcrumb.Text</li>
+                        }
+                    }
+                }
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->

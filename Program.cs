@@ -15,7 +15,6 @@ builder.Services.AddScoped<IRepository<About>, AboutService>();
 builder.Services.AddScoped<IRepository<Links>, LinksService>();
 builder.Services.AddScoped<IRepository<OurServices>, OurServicesService>();
 builder.Services.AddScoped<IRepository<SocialMediaAccounts>, SocialMediaAccountsService>();
-builder.Services.AddScoped<IRepository<Testimonial>, TestimonialService>();
 builder.Services.AddScoped<IRepository<WhyChoosingUs>, WhyChoosingUsService>();
 #endregion
 
@@ -31,6 +30,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
  
 
 app.UseHttpsRedirection();
@@ -40,6 +40,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseStatusCodePagesWithReExecute("/Home/NotFound");
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -48,6 +50,18 @@ app.MapControllerRoute(
  name: "about",
         pattern: "About",
         defaults: new { controller = "Home", action = "About" }
+        );
+
+app.MapControllerRoute(
+ name: "contact",
+        pattern: "Contact",
+        defaults: new { controller = "Home", action = "Contact" }
+        );
+
+app.MapControllerRoute(
+ name: "services",
+        pattern: "Services",
+        defaults: new { controller = "Home", action = "Services" }
         );
 
 app.Run();

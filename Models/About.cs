@@ -36,12 +36,6 @@ public class About
     [BsonElement("ProjectDone")]
     public int ProjectDone { get; set; }
 
-    [BsonElement("Baskı")]
-    public string Baskı { get; set; }
-
-    [BsonElement("Privacy")]
-    public string Privacy { get; set; }
-
     [BsonElement("WorkHours")]
     public string WorkHours { get; set; }
 }

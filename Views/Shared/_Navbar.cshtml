@@ -8,11 +8,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="/" class="nav-item nav-link active">Home</a>
-            <a href="/About" class="nav-item nav-link">About</a>
-            <a href="/Services" class="nav-item nav-link">Services</a>
+            <a href="/" class="nav-item nav-link @(ViewData["ActivePage"] as string == "Home" ? "active" : "")">Home</a>
+            <a href="/About" class="nav-item nav-link @(ViewData["ActivePage"] as string == "About" ? "active" : "")">About</a>
+            <a href="/Services" class="nav-item nav-link @(ViewData["ActivePage"] as string == "Services" ? "active" : "")">Services</a>
         </div>
-        <a href="/Contact" class="btn btn-primary px-3 d-none d-lg-block">Get Contact</a>
+        <a href="/Contact" class="btn btn-primary px-3 d-none d-lg-block @(ViewData["ActivePage"] as string == "Contact" ? "active" : "")">Get Contact</a>
     </div>
 </nav>
 <!-- Navbar End -->
