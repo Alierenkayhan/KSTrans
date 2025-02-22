@@ -12,11 +12,11 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <h5 class="text-white mb-4">Quick Links</h5>
-                <a class="btn btn-link" href="">About Us</a>
-                <a class="btn btn-link" href="">Contact Us</a>
-                <a class="btn btn-link" href="">Our Services</a>
-                <a class="btn btn-link" href="">Terms & Condition</a>
-                <a class="btn btn-link" href="">Support</a>
+                <a class="btn btn-link" href="/About">About Us</a>
+                <a class="btn btn-link" href="/Contact">Contact Us</a>
+                <a class="btn btn-link" href="/Services">Our Services</a>
+                <a class="btn btn-link" href="/Terms">Terms & Condition</a>
+                <a class="btn btn-link" href="/Support">Support</a>
             </div>
             <div class="col-lg-3 col-md-6" id="workHours-container"> </div>
             <div class="col-lg-3 col-md-6 align-self-start wow fadeInUp " data-wow-delay="0.1s">
@@ -29,7 +29,7 @@
 <!-- Copyright Start -->
 <div class="container-fluid copyright bg-dark py-4">
     <div class="container text-center">
-        <p class="mb-2">@DateTime.Now.Year - Copyright &copy; <a class="fw-semi-bold" href="#">KS Trans</a>, All Right Reserved.</p>
+        <p class="mb-2">@DateTime.Now.Year - Copyright &copy; <a class="fw-semi-bold" href="/">KS Trans</a>, All Right Reserved.</p>
         <p class="mb-0">
             Programmed By <a class="fw-semi-bold" href="https://alierenkayhan.com/">Ali Eren Kayhan</a> ||
             Designed By <a class="fw-semi-bold" href="https://htmlcodex.com">HTML Codex</a>
@@ -37,18 +37,20 @@
     </div>
 </div>
 <!-- Copyright End -->
- 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- 
 <script>
-    $(document).ready(function () {  
+    $(document).ready(function () {
+        var socialMediaApi = "@ViewBag.SocialMediaApi";
+        var aboutApi = "@ViewBag.AboutApi";
+ 
+        // Sosyal medya hesaplarını çek
         $.ajax({
-            url: "https://localhost:7056/api/socialmediaaccounts",
+            url: socialMediaApi,
             type: "GET",
             success: function (data) {
                 if (data && data.length > 0) {
                     var container = $("#social-media-container");
-                    container.empty(); // Clear previous content
+                    container.empty();  
                     data.forEach(function (link) {
                         var button = '<a class="btn btn-square btn-primary rounded-circle me-2" href="' + link.link + '" target="_blank">' +
                             '<i class="' + link.iconClass + '"></i>' +
@@ -62,15 +64,16 @@
             }
         });
 
+        // Hakkımızda ve çalışma saatleri bilgisini çek
         $.ajax({
-            url: "https://localhost:7056/api/about", // Haberler API'si
+            url: aboutApi,
             type: "GET",
             success: function (data) {
                 if (data && data.length > 0) {
                     var aboutContainer = $("#about-container");
-                    aboutContainer.empty(); // Clear previous news content
+                    aboutContainer.empty(); 
                     data.forEach(function (about) {
-                        var aboutItem = 
+                        var aboutItem =
                             '<p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>' + about.address + '</p>' +
                             '<p class="mb-2"><i class="fa fa-phone-alt me-3"></i>' + about.phone + '</p>' +
                             '<p class="mb-2"><i class="fa fa-envelope me-3"></i>' + about.email + '</p>';
@@ -78,7 +81,7 @@
                     });
 
                     var workHoursContainer = $("#workHours-container");
-                    workHoursContainer.empty(); // Clear previous news content
+                    workHoursContainer.empty(); 
                     var workHoursArray = data[0].workHours.split("\n");
                     var workhoursItem =
                         '<h5 class="text-white mb-4">Business Hours</h5>' +
@@ -86,14 +89,13 @@
                         '<p class="mb-1">Saturday</p><h6 class="text-light">' + workHoursArray[1] + '</h6>' +
                         '<p class="mb-1">Sunday</p><h6 class="text-light">' + workHoursArray[2] + '</h6>';
 
-                  
                     workHoursContainer.append(workhoursItem);
-
                 }
             },
             error: function (error) {
-                console.error("Error fetching news", error);
+                console.error("Error fetching about info", error);
             }
         });
     });
 </script>
+

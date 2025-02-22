@@ -14,21 +14,15 @@
             </div>
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <p class="fw-medium text-uppercase text-primary mb-2">About Us</p>
-                <h1 class="display-5 mb-4">We Are Leader In Industrial Market</h1>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                <h1 class="display-5 mb-4" id="about_title"></h1>
+                <p class="mb-4" id="about_description"></p>
                 <div class="d-flex align-items-center mb-4">
                     <div class="flex-shrink-0 bg-primary p-4">
-                        <h1 class="display-2">25</h1>
+                        <h1 class="display-2" id="about_yearsOfExperience"></h1>
                         <h5 class="text-white">Years of</h5>
                         <h5 class="text-white">Experience</h5>
                     </div>
-                    <div class="ms-4">
-                        <p><i class="fa fa-check text-primary me-2"></i>Power & Energy</p>
-                        <p><i class="fa fa-check text-primary me-2"></i>Civil Engineering</p>
-                        <p><i class="fa fa-check text-primary me-2"></i>Chemical Engineering</p>
-                        <p><i class="fa fa-check text-primary me-2"></i>Mechanical Engineering</p>
-                        <p class="mb-0"><i class="fa fa-check text-primary me-2"></i>Oil & Gas Engineering</p>
-                    </div>
+                    <div class="ms-4" id="about-feautre-container"></div>
                 </div>
                 <div class="row pt-2">
                     <div class="col-sm-6">
@@ -38,7 +32,7 @@
                             </div>
                             <div class="ms-3">
                                 <p class="mb-2">Email us</p>
-                                <h5 class="mb-0">info@example.com</h5>
+                                <h5 class="mb-0" id="about_email"></h5>
                             </div>
                         </div>
                     </div>
@@ -49,7 +43,7 @@
                             </div>
                             <div class="ms-3">
                                 <p class="mb-2">Call us</p>
-                                <h5 class="mb-0">+012 345 6789</h5>
+                                <h5 class="mb-0" id="about_phone"></h5>
                             </div>
                         </div>
                     </div>
@@ -59,3 +53,50 @@
     </div>
 </div>
 <!-- About End -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var aboutApi = "@ViewBag.AboutApi";
+
+        // Hakkımızda ve çalışma saatleri bilgisini çek
+        $.ajax({
+            url: aboutApi,
+            type: "GET",
+            success: function (data) {
+                if (data && data.length > 0) {
+                    var about = data[0];
+                    $("#about_title").text(about.title); 
+                    
+                    var descriptionArray = about.description.split('\n');
+                    $("#about_description").empty();  
+                    descriptionArray.forEach(function (line) {
+                        if (line.trim()) {  
+                            $("#about_description").append('<p>' + line.trim() + '</p>');
+                        }
+                    });
+
+                    $("#about_yearsOfExperience").text(about.yearsOfExperience);
+                    $("#about_email").text(about.email);
+                    $("#about_phone").text(about.phone);
+
+                    var aboutFeatureContainer = $("#about-feautre-container");
+                    aboutFeatureContainer.empty();
+                    var featuresArray = about.features.split('\n');
+                    featuresArray.forEach(function (feature) {
+                        if (feature.trim()) {  // Boş satırları kontrol et
+                            var aboutItem =
+                                '<p><i class="fa fa-check text-primary me-2"></i>' + feature.trim() + '</p>';
+                            aboutFeatureContainer.append(aboutItem);
+                        }
+                    });
+                }
+            },
+            error: function (error) {
+                console.error("Error fetching about info", error);
+            }
+        });
+    });
+</script>
+

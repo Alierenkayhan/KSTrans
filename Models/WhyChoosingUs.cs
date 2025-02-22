@@ -9,7 +9,7 @@ public class WhyChoosingUs
     public string Title { get; set; }
 
     [BsonElement("Description")]
-    public int Description { get; set; }
+    public string Description { get; set; }
 
     [BsonElement("Points")]
     public string Points { get; set; }

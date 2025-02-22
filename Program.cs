@@ -12,8 +12,6 @@ builder.Services.Configure<DatabaseSettings>(
 
 #region Scoped
 builder.Services.AddScoped<IRepository<About>, AboutService>();
-builder.Services.AddScoped<IRepository<Files>, FilesService>();
-builder.Services.AddScoped<IRepository<Image>, ImageService>();
 builder.Services.AddScoped<IRepository<Links>, LinksService>();
 builder.Services.AddScoped<IRepository<OurServices>, OurServicesService>();
 builder.Services.AddScoped<IRepository<SocialMediaAccounts>, SocialMediaAccountsService>();
@@ -45,5 +43,11 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+ name: "about",
+        pattern: "About",
+        defaults: new { controller = "Home", action = "About" }
+        );
 
 app.Run();

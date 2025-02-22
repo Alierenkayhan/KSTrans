@@ -29,3 +29,12 @@ public class AboutController : CrudControllerBase<About>
 {
     public AboutController(IRepository<About> aboutService) : base(aboutService) { }
 }
+public class WhyChoosingUsController : CrudControllerBase<WhyChoosingUs>
+{
+    public WhyChoosingUsController(IRepository<WhyChoosingUs> whyChoosingUsService) : base(whyChoosingUsService) { }
+}
+
+public class DBLinksController : CrudControllerBase<Links>
+{
+    public DBLinksController(IRepository<Links> linksService) : base(linksService) { }
+}
